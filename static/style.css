@@ -1,0 +1,25 @@
+html{
+    min-height: 100%;
+}
+.wrapper{
+    margin: 0px;
+    max-width: 100%;
+    min-height: 100%;    
+    padding: 0px;  
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; 
+    padding-left: 15px;       
+}
+
+.icon_delete{
+    color:red;
+}
+
+#test{
+    color: red;
+}

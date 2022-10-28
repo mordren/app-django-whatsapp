@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Seja Bem vindo {% endblock%}
+
+{% block main %}
+    </br></br>
+    <div class="row">
+        <div class="col-sm"><h2 class="home">Bem vindo Gestão de Whatsapp</h2></div>
+        <div class="col-6">         
+            {{ result }}
+        </div>
+        <div class="col-6"></div>                
+    </div>
+    <span><a href="{% url 'person_list' %}">Gerenciador de Clientes</a></span>
+    <p> Aqui será feito um dashboard para conexão dos clientes e vencimentos dos laudos</p>
+    <a href="{% url 'person_create' %}">Criar novo cliente</a>
+{% endblock %}  
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
