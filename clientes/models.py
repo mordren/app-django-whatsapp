@@ -9,4 +9,5 @@ class Person(models.Model):
     phone = models.PositiveBigIntegerField(validators=[MaxValueValidator(9999999999)],
                 help_text="DD-XXXX XXXX sem os espaços e sem o nove adicional",
                 unique=True)
-    sucess_url = reverse_lazy('home')
+    sucess_url = reverse_lazy('home')    
+    
