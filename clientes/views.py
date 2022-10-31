@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 
 class PersonCreate(CreateView):
     model = Person
-    fields = ['name','email', 'phone']
+    fields = ['name','email', 'whatsapp']
     success_url = reverse_lazy('home')
 
 class PersonList(ListView):
@@ -16,7 +16,7 @@ class PersonList(ListView):
 class PersonUpdate(UpdateView):
 #    login_url = 'login'
     model = Person
-    fields = ['name','email', 'phone']
+    fields = ['name','email', 'whatsapp']
     success_url = reverse_lazy('home')
     
 def personDelete(request, pk):
