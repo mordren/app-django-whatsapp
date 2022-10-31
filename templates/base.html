@@ -15,7 +15,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>  
-    <div class="wrapper container">
+    <div class="wrapper">
         <nav class="navbar navbar-dark bg-dark">
             <div class="row">
                 <div class="col">
@@ -36,10 +36,42 @@
                 {% endif %}            
             </div>
         </nav>     
-        <div class="container">
-            {% block main %}    
-
-            {% endblock %}
+        <!-- aqui tive que uisar o fluid, porque o container normal não deixa eu usar 100% do width-->
+        <br/>
+        <div class="container-fluid">            
+            <div class="row dashboard-layout">
+                <div class="col-2" id="clientes-list">
+                    <div class="menu">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'person_list'%}">
+                                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                                    <span>Gerenciar Cliente</span>
+                                </a>
+                            </li>                    
+                        </ul>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                                    <span>Gerenciar</span>
+                                </a>
+                            </li>                    
+                        </ul>
+                    </div>
+                                            
+                </div>
+                <div class="col-10" id="dashboard">
+                    <div class="conteudo">                               
+                        {% block main %}   
+            
+                        {% endblock %}
+                    </div>
+        
+                    </div>
+                </div>       
+            </div>     
+            
         </div>       
     </div>    
     {% block footer %}  

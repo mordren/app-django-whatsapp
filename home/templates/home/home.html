@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
-{% block title %} Seja Bem vindo {% endblock%}
+{% block title %} Novo Cliente {% endblock%}
 
-{% block main %}
-    </br></br>
-    <div class="row">
-        <div class="col-sm"><h2 class="home">Bem vindo Gestão de Whatsapp</h2></div>
-        <div class="col-6">         
-            {{ result }}
-        </div>
-        <div class="col-6"></div>                
+{% block main %}        
+    <!-- aqui nós pegamos o objeto default do método object_list que provê todos do model-->    
+    <div class="container">
+        <h3>Lista de todos clientes</h3>
+        <ul class="list-group">
+        {% for person in object_list %}
+            <li class="list-group-item">
+                <a href="{% url 'person_update' person.id %}">{{ person.name|capfirst }}
+                    {{person.last_name|capfirst}} </a>            
+                <a href="{% url 'person_delete' person.id %}"  
+                    onclick="return confirm('Você tem certeza que quer deletar ?')">
+                    <i class="fa-solid fa-trash icon_delete"></i></a>
+            </li>
+            </br>            
+        <!-- aqui verifica-se não tem nenhum é passada essa resposta. -->
+        {% empty %}
+            <p>Não tem clientes cadastrados </p>
+            <a href="{% url 'person_create' %}" >Cadastrar Novos </a>
+        {% endfor %}      
+        </ul>        
+        <a href="{% url 'person_create' %}"><button class="btn btn-info">Cadastrar Novos</button></a>    
+        <br/>
     </div>
-    <span><a href="{% url 'person_list' %}">Gerenciador de Clientes</a></span>
-    <p> Aqui será feito um dashboard para conexão dos clientes e vencimentos dos laudos</p>
-    <a href="{% url 'person_create' %}">Criar novo cliente</a>
-{% endblock %}  
+{% endblock %}
 
 {% block footer %}
     {% include 'footer.html' %}

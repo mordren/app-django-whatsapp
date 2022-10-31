@@ -1,25 +1,71 @@
-html{
+/* Base.html todo o conteúdo da página está dentro desse div */
+body{
+    min-width: 100%;
     min-height: 100%;
+    background-color: #d4d4d4c9;
 }
-.wrapper{
-    margin: 0px;
-    max-width: 100%;
-    min-height: 100%;    
-    padding: 0px;  
+a:link{
+    text-decoration: none;
+    color: black;
 }
 
+.wrapper{    
+    max-width: 100%;    
+    padding: 0px;  
+    height: 100%;    
+}
+
+.conteudo{
+    padding: 15px;
+}
+
+/* login  */
+.login_form{
+    align-items: center;
+    width: 10%;
+    padding-left: 40%;
+    padding-right: 40%;        
+    padding-top:10%;
+}
+
+/* dashboard */
+.menu {
+    background-color: white;
+}
+
+#clientes-list{
+    padding-right: 0%;
+}
+.conteudo{
+    background-color: white;
+}
+
+.nav-link{
+    color:black;
+}
+
+.nav-item i{
+    font-size: 20px;    
+}
+
+.nav:hover i{
+    color: white;
+    font-size: 23px;
+}
+.nav-item:hover{    
+    background-color: #858796;
+}
+
+/* list clientes */
+.icon_delete{
+    color:red;
+}
+
+/* footer */
 .footer{
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 60px; 
     padding-left: 15px;       
-}
-
-.icon_delete{
-    color:red;
-}
-
-#test{
-    color: red;
 }
