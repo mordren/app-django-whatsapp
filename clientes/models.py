@@ -1,7 +1,7 @@
 from wsgiref.validate import validator
 from django.db import models
 from django.urls import reverse_lazy
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinLengthValidator
 
 class Person(models.Model):
     name = models.CharField(max_length=60)    
@@ -10,4 +10,7 @@ class Person(models.Model):
                 help_text="DD-XXXX XXXX sem os espaços e sem o nove adicional",
                 unique=True)
     sucess_url = reverse_lazy('home')    
+    
+    def __str__(self):
+        return self.name
     
