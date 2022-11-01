@@ -36,11 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
-    'django_bootstrap_icons',
+    'django.contrib.staticfiles',  
+    'bootstrap_datepicker',
+    'django_bootstrap_icons',        
     'bootstrapform',
     'clientes',
-    'home',
+    'home',    
 ]
 
 MIDDLEWARE = [
@@ -107,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -135,3 +136,5 @@ STATICFILES_DIRS =['static']
 LOGIN_REDIRECT_URL = 'login/'
 
 LOGIN_URL = '/login'
+
+DATE_INPUT_FORMATS = ['%d/%m/%Y']

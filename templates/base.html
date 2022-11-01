@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- Fengyuan Chen's Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>  
@@ -46,15 +49,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'person_list'%}">
                                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                                    <span>Gerenciar Cliente</span>
+                                    <span>Clientes</span>
                                 </a>
                             </li>                    
                         </ul>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">
+                                <a class="nav-link" href="{% url 'empresa_list' %}">
                                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                                    <span>Gerenciar</span>
+                                    <span>Empresas</span>
+                                </a>
+                            </li>                    
+                        </ul>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'laudo_list' %}">
+                                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                                    <span>Laudos</span>
                                 </a>
                             </li>                    
                         </ul>

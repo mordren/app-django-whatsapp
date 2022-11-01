@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
 
-{% block title %} Lista de Cliente {% endblock%}
+{% block title %} Lista de laudos {% endblock%}
 
 {% block main %}        
     <!-- aqui nós pegamos o objeto default do método object_list que provê todos do model-->    
     <div class="container">
-        <h3>Lista de todos clientes</h3>
+        <h3>Lista de todos laudos</h3>
         <ul class="list-group">
-        {% for person in object_list %}
+        {% for laudo in object_list %}
             <li class="list-group-item">
-                <a href="{% url 'person_update' person.id %}">{{ person.name|capfirst }}
-                    {{person.last_name|capfirst}} </a>            
-                <a href="{% url 'person_delete' person.id %}"  
+                <a href="{% url 'laudo_update' laudo.pk %}">Laudo Nº {{ laudo.numero}}
+                     Vencimento: {{ laudo.dataValidade }}
+                </a>            
+                <a href="{% url 'laudo_delete' laudo.id %}"  
                     onclick="return confirm('Você tem certeza que quer deletar ?')">
                     <i class="fa-solid fa-trash icon_delete"></i></a>
             </li>
@@ -20,7 +21,7 @@
         <!-- aqui verifica-se não tem nenhum é passada essa resposta. -->        
         {% endfor %}      
         </ul>        
-        <a href="{% url 'person_create' %}"><button class="btn btn-info">Cadastrar Novos</button></a>    
+        <a href="{% url 'laudo_create' %}"><button class="btn btn-info">Cadastrar Novos</button></a>    
         <br/>
     </div>
 {% endblock %}

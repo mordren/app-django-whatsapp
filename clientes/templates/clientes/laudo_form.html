@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+
+{% block title %}Novo Laudos{% endblock%}
+
+{% block main %}    
+    <br/>
+    <div class="row">
+        <div class="col-12">
+            <h3> Criar um novo Laudos </h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}     
+                {{form|bootstrap}}    
+            </br></br>
+                <input type="submit" class="btn btn-info" value="Salvar"/>
+            </form>
+        </div>
+    </div>     
+    <script>
+        $(function () {            
+            $("#id_dataValidade").datepicker({
+                format: 'dd/mm/yyyy'
+            });
+        });
+    </script>
+{% endblock %}
