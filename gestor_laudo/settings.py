@@ -36,16 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-<<<<<<< HEAD
     'django.contrib.staticfiles',        
-=======
     'django.contrib.staticfiles',  
-    'bootstrap_datepicker',
-    'django_bootstrap_icons',        
-<<<<<<< HEAD
->>>>>>> parent of a45e12d (upload heroku)
-=======
->>>>>>> parent of a45e12d (upload heroku)
+    'bootstrap_datepicker',    
     'bootstrapform',
     'clientes',
     'home',
