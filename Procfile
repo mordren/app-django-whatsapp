@@ -1,1 +1,1 @@
-web: gunicorn gestor_laudo.wsgi
+web: gunicorn gestao_laudo.wsgi
