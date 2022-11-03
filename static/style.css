@@ -66,6 +66,19 @@ a:visited{
     color:red;
 }
 
+
+/* vencimento */
+
+.table {
+    align-items: center;
+    text-align: center;
+    
+}
+
+.table tr {
+    font-size: 12px;
+}
+
 /* footer */
 .footer{
     position: absolute;

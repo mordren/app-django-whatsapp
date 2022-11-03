@@ -8,8 +8,8 @@ from django.core.validators import MaxValueValidator, MinLengthValidator
 class Person(models.Model):
     name = models.CharField(max_length=60)    
     email = models.EmailField(blank=True, null=True)  
-    whatsapp = models.PositiveBigIntegerField(validators=[MaxValueValidator(9999999999)],
-                help_text="DD-XXXX XXXX sem os espaços e sem o nove adicional",
+    whatsapp = models.PositiveBigIntegerField(validators=[MaxValueValidator(99999999999)],
+                help_text="DD-9XXXX XXXX sem os espaços",
                 unique=True)
     sucess_url = reverse_lazy('home')    
     
@@ -42,6 +42,8 @@ class Laudo(models.Model):
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, blank=True,
                 help_text="Se não tem empresa deixar vazio")   
     tipo = models.CharField(max_length=4, choices=[(CIV, 'CIV'),(CIPP, 'CIPP')])   
+    dataLaudo = models.DateField()
+    placa = models.CharField(help_text="formato XXX-XXXX", max_length=8)
     dataValidade = models.DateField()         
     def __str__(self):
         return 'Laudo Nº' + str(self.numero) + ' Vencimento ' + self.dataValidade.strftime("%d/%m/%y")

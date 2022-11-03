@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} Status {% endblock%}
+
+{% block main %}        
+    <!-- aqui nós pegamos o objeto default do método object_list que provê todos do model-->    
+    <div class="row">
+        <form action="{% url 'send' %}" name="send_mensage" method="POST">
+            {% csrf_token %}
+            <!--  min=1000000000 max=9999999999  -->
+            <h4>Mensagem para o cliente : {{ laudo.cliente.name }}</h4>
+            <label>Número para quem você irá mandar a mensagem</label><br/>
+            <input name="number" type="number" value="{{laudo.telefone}}" ><br/>
+            <label>Sua mensagem</label><br/>
+            <input name="message" type="text" value="{{laudo.mensagem}}" size=100 >
+            <br/><br/>
+            <input type="submit" class="btn btn-info" value="Enviar"/>
+        </form>
+        <br/>
+        <br/>
+        <br/>       
+    </div>    
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

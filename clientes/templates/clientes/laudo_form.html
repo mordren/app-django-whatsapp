@@ -12,14 +12,22 @@
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}     
                 {{form|bootstrap}}    
+                <br/>
+                <a href="{% url 'prepare' laudo.pk %}"><i class="fa-brands fa-whatsapp"> Enviar  Mensagem</a></i>
+
             </br></br>
                 <input type="submit" class="btn btn-info" value="Salvar"/>
             </form>
+            <br/>
+            
         </div>
     </div>     
     <script>
         $(function () {            
             $("#id_dataValidade").datepicker({
+                format: 'dd/mm/yyyy'
+            });
+            $("#id_dataLaudo").datepicker({
                 format: 'dd/mm/yyyy'
             });
         });

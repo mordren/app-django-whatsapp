@@ -7,8 +7,8 @@ from gestor_laudo.scrapers import *
 @login_required(login_url='login')
 def home(request):         
     #import pdb; pdb.set_trace()    
-    whats = WhatsStatus()   
-    return render(request, 'home/home.html', {'whats':whats})
+    #whats = WhatsStatus()   
+    return render(request, 'home/home.html')
 
 def my_logout(request):
     logout(request)

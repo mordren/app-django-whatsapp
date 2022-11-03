@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} Status {% endblock%}
+
+{% block main %}        
+    <table class="table table-striped table-dark">
+        <thead>        
+        <tr>
+            <th scope="col">Número</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Data Validade</th>            
+            <th scope="col">Opções</th>            
+            <th scope="col">telefone</th>            
+            <th scope="col">Dias para Vencer</th>            
+        </tr>
+        </thead>
+        <tbody>
+        {% for laudo in laudos %}
+        <tr>
+            <th>{{ laudo.numero }}</th>
+            <th>{{ laudo.tipo }}</th>
+            <th>{{ laudo.dataValidade }}</th>                        
+            <th><a href="{% url 'prepare' laudo.pk %}"><i class="fa-brands fa-whatsapp"></a></i></th>
+            <th>{{ laudo.telefone }}</th>            
+            <th>{{ laudo.vencimento }}</th>            
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

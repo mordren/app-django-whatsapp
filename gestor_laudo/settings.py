@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',        
     'bootstrapform',
     'clientes',
-    'home',    
+    'home',        
+    'wp',
 ]
 
 MIDDLEWARE = [
