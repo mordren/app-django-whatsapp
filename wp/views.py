@@ -53,6 +53,7 @@ def sendMessage(request):
             envio = scrapers.sendMessege(message, number)    
         return render(request, 'wp/sended.html', {'envio':envio})
     else:
+        scrapers.importWhatsappQrCode()
         return render(request, 'wp/status.html')
     
 
