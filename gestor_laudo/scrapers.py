@@ -1,5 +1,5 @@
 import base64
-import os
+import os 
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -9,6 +9,21 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 driver = webdriver
+def startHeroku():
+    chrome_options = Options()
+    #mantem o chrome aberto mais tempo.
+    #chrome_options.add_experimental_option("detach", True)
+    chrome_options.add_argument('--profile-directory=Default')
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    #salve tudo dentro dessa pasta, para servidor preciso que isso aqui seja modificado.    
+    chrome_options.add_argument('--user-data-dir=E:\\Programação\\Python\\App Agil\\app-django-whatsapp\\.wdm\\drivers\\chromedriver\\win32\\107.0.5304') #TODO alterar isso para o servidor.        
+    os.environ['WDM_LOCAL'] = '1'
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
+                chrome_options=chrome_options)                        
+    print('start service')     
+    return driver
 
 def start():                   
     chrome_options = Options()
@@ -36,7 +51,7 @@ def importWhatsappQrCode():
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
     global driver
 #    scrape('https://web.whatsapp.com/')
-#    time.sleep(10)
+    time.sleep(10)
     try:
         script = "return document.querySelector('canvas[aria-label=\"Scan me!\"]').toDataURL('image/png', 1.0).substring(21);"
         url = driver.execute_script(script)            
@@ -58,18 +73,20 @@ def whatsAppStatus():
 
 def whatsLogin():        
     global driver
-    scrape('https://web.whatsapp.com/')
-    time.sleep(20)
-    #TODO fazer uma barra de progresso na view que irá chamar ele.    
-    try:
-        if (driver.find_element(By.ID, 'pane-side').is_displayed):        
-            print("O whatsapp está conectado")            
-            return True
-            #driver.close()
-    except:                 
-        #driver.close()
-        print('Whatsapp está offline')
-        return False
+    scrape('https://web.whatsapp.com/')    
+    #TODO fazer uma barra de progresso na view que irá chamar ele.        
+    while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
+        time.sleep(1)
+        print('esperando para conectar')
+        try:
+            if (driver.find_element(By.TAG_NAME, 'canvas').is_displayed()):
+                return False
+        except:
+            print('sem qr code')
+                
+    if len(driver.find_elements(By.ID, 'pane-side')) >= 1:
+        print("O whatsapp está conectado")    
+        return True
     
 def test():
     # Setup wait for later
@@ -103,4 +120,4 @@ def sendMessege(msg,telefone):
 #WhatsAppStatus()
 def encerrar():
     global driver 
-    driver.close()
+    driver.close()    
