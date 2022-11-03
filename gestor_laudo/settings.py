@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#+g2_f0zkwr%!baj8ep)72of=24fz@*nfv_)!%*^!=#6j#38zc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['app-agil.herokuapp.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['app-agil.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'gestor_laudo.urls'
