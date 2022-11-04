@@ -1,6 +1,6 @@
 .wdm/
 db.sqlite3
-migrations
+migrations/
 .vscode
 db.sqlite3
 _pycache__
