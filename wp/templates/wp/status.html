@@ -12,7 +12,10 @@
         {%else %}
             <span>Por favor faça o login:</span>
             <img src="{% static 'image.png' %}"/>
+            <br/><br/>
             <span style="color:red">Atualize a página assim que conectar o whatsapp</span>
+            <br/><br/>
+            <span style="color:red">Se ocorrer um erro de conexão com esse qrcode, usar teclas: ctrl+F5 para atualizar.</span>
         {% endif %}
     </div>
 {% endblock %}

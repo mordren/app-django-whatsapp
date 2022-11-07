@@ -33,7 +33,7 @@ def start():
     #salve tudo dentro dessa pasta, para servidor preciso que isso aqui seja modificado.    
     chrome_options.add_argument('--user-data-dir=E:\\Programação\\Python\\App Agil\\app-django-whatsapp\\.wdm\\drivers\\chromedriver\\win32\\107.0.5304') #TODO alterar isso para o servidor.    
     os.environ['WDM_LOCAL'] = '1'
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(version="107.0.5304").install()),
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
                 chrome_options=chrome_options)                        
     print('start service')     
     return driver
@@ -49,8 +49,7 @@ def scrape(url):
     
 def importWhatsappQrCode():            
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
-    global driver
-    time.sleep(10)
+    global driver    
     try:
         script = "return document.querySelector('canvas[aria-label=\"Scan me!\"]').toDataURL('image/png', 1.0).substring(21);"
         url = driver.execute_script(script)            
@@ -65,18 +64,15 @@ def importWhatsappQrCode():
 def whatsLogin():        
     global driver
     scrape('https://web.whatsapp.com/')    
-    #TODO fazer uma barra de progresso na view que irá chamar ele.
-    time.sleep(25)        
+    #TODO fazer uma barra de progresso na view que irá chamar ele.            
     while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
         time.sleep(1)
         print('esperando para conectar')                
         #faz uma verificação se o whatsapp está conectado na conta.
-        if (len(driver.find_elements(By.XPATH, '//*[@id="app"]/div/div/div[3]/div[1]/div/div[1]/div')) >= 1):
-            return False                   
-                
-    if len(driver.find_elements(By.ID, 'pane-side')) >= 1:
-        print("O whatsapp está conectado")    
-        return True
+        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):            
+            return True
+        if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div[2]/div/canvas')) >= 1):
+            return False
     
 def sendMessege(msg,telefone):    
     global driver 

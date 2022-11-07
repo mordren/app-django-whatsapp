@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from datetime import datetime
+import time
 from django.shortcuts import render
 from clientes.models import Laudo
 from gestor_laudo import scrapers
@@ -10,6 +11,7 @@ def status(request):
         return render(request, 'wp/status.html', {'status':True})
     else:        
         scrapers.importWhatsappQrCode()
+        time.sleep(2)
         return render(request, 'wp/status.html', {'status':False})
     
 def vencimento(request):
