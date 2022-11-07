@@ -44,7 +44,7 @@ def scrape(url):
         print(driver.current_window_handle)   
         driver.get(url)
     except:
-        driver = startHeroku()
+        driver = start()
         driver.get(url)    
     
 def importWhatsappQrCode():            
@@ -67,7 +67,8 @@ def whatsLogin():
     #TODO fazer uma barra de progresso na view que irá chamar ele.            
     while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
         time.sleep(1)
-        print('esperando para conectar')                
+        print('esperando para conectar')        
+        print(driver.page_source)        
         #faz uma verificação se o whatsapp está conectado na conta.
         if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):            
             return True
