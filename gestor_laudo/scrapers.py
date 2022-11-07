@@ -16,16 +16,12 @@ def startHeroku():
     chrome_options = Options()
     #mantem o chrome aberto mais tempo.
     #chrome_options.add_experimental_option("detach", True)
-    chrome_options.add_argument('--profile-directory=Default')
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')    
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("user-agent=User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304 Safari/537.36")
-    #salve tudo dentro dessa pasta, para servidor preciso que isso aqui seja modificado.    
-    chrome_options.add_argument('--user-data-dir=E:\\Programação\\Python\\App Agil\\app-django-whatsapp\\.wdm\\drivers\\chromedriver\\win32\\107.0.5304') #TODO alterar isso para o servidor.        
-    os.environ['WDM_LOCAL'] = '1'
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
-                chrome_options=chrome_options)                        
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)              
     print('start service')     
     return driver
 
