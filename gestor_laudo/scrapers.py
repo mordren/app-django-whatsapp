@@ -21,7 +21,7 @@ def startHeroku():
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.browser_version('107.0.5304.62')
+    print(chrome_options.chrome.chromedriverVersion)
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)              
     print('start service')     
     return driver
