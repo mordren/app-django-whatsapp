@@ -68,8 +68,7 @@ def whatsLogin():
     #TODO fazer uma barra de progresso na view que irá chamar ele.            
     while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
         time.sleep(1)
-        print('esperando para conectar')        
-        print(driver.page_source)        
+        print('esperando para conectar')                 
         #faz uma verificação se o whatsapp está conectado na conta.
         if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):            
             return True
@@ -91,5 +90,5 @@ def sendMessege(msg,telefone):
         return 'Numero Inválido:'
     else:        
         driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
-        time.sleep(5)
+        time.sleep(2)
         return 'Mensagem enviada com sucesso'
