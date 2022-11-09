@@ -1,7 +1,6 @@
 .wdm/
-db.sqlite3
+.sqlite3
 migrations/
-.vscode
-db.sqlite3
+.vscode/
 _pycache__
 .env
