@@ -3,9 +3,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 import urllib
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import TemplateView
 from clientes.forms import DateForm
-from .models import Empresa, Laudo, Mensage, Person
+from .models import Laudo, Mensage, Person
 from django.views.generic.list import ListView
 #from django.contrib.auth.mixins import LoginRequiredMixin
 from gestor_laudo import scrapers
@@ -30,25 +29,6 @@ def personDelete(request, pk):
     person.delete()
     return redirect('person_list')
 
-class EmpresaCreate(CreateView):
-    model = Empresa
-    fields = ['name','telefone','whatsapp']
-    success_url = reverse_lazy('home')
-
-class EmpresaList(ListView):
-    model = Empresa
-    
-class EmpresaUpdate(UpdateView):
-    model = Empresa
-    fields = ['name','telefone','whatsapp']
-    success_url = reverse_lazy('empresa_list')
-    
-def EmpresaDelete(request, pk):
-    empresa = get_object_or_404(Empresa, pk=pk)
-    #nesse eu envio uma pessoa para criar uma instância lá no template, para decidir se vou deletar.        
-    empresa.delete()
-    return redirect('empresa_list')
-
 class LaudoCreate(CreateView):
     model = Laudo
     fields = ['numero','tipo','cliente', 'empresa','placa','dataLaudo','dataValidade']  
@@ -57,9 +37,8 @@ class LaudoCreate(CreateView):
 def LaudoList(request):         
     laudos = Laudo.objects.all().order_by('dataValidade')                
     for laudo in laudos:
-        #aqui eu estou adicionando esses atributos só para a table        
-        laudo.telefone = laudo.get_laudo_number()
-        laudo.vencimento = laudo.get_days_left()        
+        #aqui eu estou adicionando esses atributos só para a table                
+        laudo.vencimento = laudo.get_days_left()
     return render(request, 'clientes/laudo_list.html', {'object_list':laudos})    
     
 class LaudoUpdate(UpdateView):
@@ -86,14 +65,13 @@ def verify_mensage():
     for laudo in laudos:        
         if (laudo.get_days_left() < 31):
             #verifica se já existe uma mensagem dessas no banco            
-            vencimento = laudo.get_days_left()
-            phone = laudo.get_laudo_number()
+            vencimento = laudo.get_days_left()            
             #infelizment nãosei como corrigir isso.
             mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {vencimento} dias. Venha à Agil Inspeções : Endereço: TO 080 - Luzimangues, Porto Nacional - TO. Abraço e tenha um bom dia" 
             if(Mensage.objects.filter(laudo = laudo, type='periodo1').exists()):                
                print('Já foi enviada mensagem no período de 30 dias')
             else:
-                msg = Mensage(mensage = mensagem,phone = phone,laudo = laudo,type = 'periodo1')                           
+                msg = Mensage(mensage = mensagem,phone = laudo.cliente.whatsapp,laudo = laudo,type = 'periodo1')                           
                 print('Será enviada a mensagem dos 30 dias')
                 if(Mensage.objects.filter(type='periodo2').exists()):
                     msg.type = 'periodo2'

@@ -22,7 +22,7 @@ def startHeroku():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")    
     chrome_options.add_argument("user-agent=User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.62 Safari/537.36")
-    chrome_options.add_argument('--user-data-dir=CHROMEDRIVER_PATH') #TODO alterar isso para o servidor.    
+    chrome_options.add_argument('--user-data-dir=GOOGLE_CHROME_BIN') #TODO alterar isso para o servidor.    
 
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)              
     print('start service')     
@@ -94,6 +94,6 @@ def send_messege(msg,telefone):
         return 'Numero Inválido:'
     else:        
         driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
-        time.sleep(2)
+        time.sleep(4)
         driver.close()
         return 'msg ok'

@@ -10,11 +10,6 @@ urlpatterns = [
     path('person_update/<int:pk>/', login_required(PersonUpdate.as_view()), name="person_update"),      
     path('person_delete/<int:pk>/', personDelete, name='person_delete'),    
     
-    path('empresa_list/', login_required(EmpresaList.as_view()), name="empresa_list"),
-    path('empresa_create/', login_required(EmpresaCreate.as_view()), name="empresa_create"),
-    path('empresa_update/<int:pk>/', login_required(EmpresaUpdate.as_view()), name="empresa_update"),
-    path('empresa_delete/<int:pk>/', EmpresaDelete, name="empresa_delete"),    
-    
     path('laudo_list/', login_required(LaudoList), name="laudo_list"),
     path('laudo_create/', login_required(LaudoCreate.as_view()), name="laudo_create"),
     path('laudo_update/<int:pk>/', login_required(LaudoUpdate.as_view()), name="laudo_update"),

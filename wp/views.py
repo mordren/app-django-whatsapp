@@ -16,14 +16,14 @@ def vencimento(request):
     laudos = Laudo.objects.all()                
     for laudo in laudos:
         #aqui eu estou adicionando esses atributos só para o FORM        
-        laudo.telefone = Laudo.get_laudo_number(laudo)            
+        laudo.telefone = laudo.cliente.whatsapp        
         laudo.vencimento = Laudo.get_days_left(laudo)        
     return render(request, 'wp/vencimento.html', {'laudos':laudos})
 
 def prepareMessage(request, pk):
     laudo = get_object_or_404(Laudo, pk=pk)    
     #aqui eu estou adicionando esses atributos só para o FORM
-    laudo.telefone = Laudo.get_laudo_number(laudo)            
+    laudo.telefone = laudo.cliente.whatsapp
     laudo.vencimento = Laudo.get_days_left(laudo)           
     laudo.mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {laudo.vencimento} dias. Venha à Agil Inspeções : Endereço bla bla bla, Palmas-TO. Abraço e tenha um bom dia"
     return render(request, 'wp/send.html',{'laudo':laudo})
