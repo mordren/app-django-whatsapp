@@ -11,4 +11,4 @@ primeira rotina vai pegar todo dia ás 8:00 horas da manhã e verificar quais ve
         
 segunda rotina ás 10 horas da manhã vai enviar para o celular dos clientes a mensagem
     rodar a minha solução de envio de mensagens
-    trocar o enviada para True    
+    trocar o enviada para True
