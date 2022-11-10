@@ -22,6 +22,8 @@ def startHeroku():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")    
     chrome_options.add_argument("user-agent=User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.62 Safari/537.36")
+    chrome_options.add_argument('--user-data-dir=CHROMEDRIVER_PATH') #TODO alterar isso para o servidor.    
+
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)              
     print('start service')     
     return driver
@@ -45,7 +47,7 @@ def scrape(url):
         print(driver.current_window_handle)   
         driver.get(url)
     except:
-        driver = start()
+        driver = startHeroku()
         driver.get(url)    
     
 def importWhatsappQrCode():            
