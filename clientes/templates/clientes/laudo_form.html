@@ -8,14 +8,19 @@
     <br/>
     <div class="row">
         <div class="col-12">
-            <h3> Criar um novo Laudos </h3>
+            <h3>Laudos</h3>            
+                {% if laudo != None  %}
+                    <a href="{% url 'prepare' laudo.pk %}"><h6><i class="fa-brands fa-whatsapp"></i>Enviar  Mensagem</h6></a>                    
+                    <a href="{% url 'laudo_delete' laudo.id %}"  
+                        onclick="return confirm('Você tem certeza que quer deletar ?')">
+                        <h6>Deletar o Laudo {{ laudo.numero }}
+                        <i class="fa-solid fa-trash icon_delete"></i></h6>
+                    </a>
+                {% endif %}
+                <br/>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}     
-                {{form|bootstrap}}    
-                <br/>
-                <a href="{% url 'prepare' laudo.pk %}"><i class="fa-brands fa-whatsapp"> Enviar  Mensagem</a></i>
-
-            </br></br>
+                {{form|bootstrap}}                
                 <input type="submit" class="btn btn-info" value="Salvar"/>
             </form>
             <br/>

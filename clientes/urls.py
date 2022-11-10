@@ -15,7 +15,7 @@ urlpatterns = [
     path('empresa_update/<int:pk>/', login_required(EmpresaUpdate.as_view()), name="empresa_update"),
     path('empresa_delete/<int:pk>/', EmpresaDelete, name="empresa_delete"),    
     
-    path('laudo_list/', login_required(LaudoList.as_view()), name="laudo_list"),
+    path('laudo_list/', login_required(LaudoList), name="laudo_list"),
     path('laudo_create/', login_required(LaudoCreate.as_view()), name="laudo_create"),
     path('laudo_update/<int:pk>/', login_required(LaudoUpdate.as_view()), name="laudo_update"),
     path('laudo_delete/<int:pk>/', LaudoDelete, name="laudo_delete"),        

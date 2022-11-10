@@ -45,7 +45,7 @@ def scrape(url):
         print(driver.current_window_handle)   
         driver.get(url)
     except:
-        driver = startHeroku()
+        driver = start()
         driver.get(url)    
     
 def importWhatsappQrCode():            
@@ -62,7 +62,7 @@ def importWhatsappQrCode():
     except:
         print('Erro na importação do whatsapp')
 
-def whatsLogin():        
+def whats_login():        
     global driver
     scrape('https://web.whatsapp.com/')    
     #TODO fazer uma barra de progresso na view que irá chamar ele.            
@@ -75,7 +75,7 @@ def whatsLogin():
         if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div[2]/div/canvas')) >= 1):
             return False
     
-def sendMessege(msg,telefone):    
+def send_messege(msg,telefone):    
     global driver 
     texto = urllib.parse.quote(msg)
     url = f"http://web.whatsapp.com/send?phone={telefone}&text={texto}"
@@ -87,8 +87,11 @@ def sendMessege(msg,telefone):
     
     if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/span[2]/div/span/div/div/div/div/div/div[1]'))  > 0):
         print('numero invalido')
+        time.sleep(3)
+        driver.close()
         return 'Numero Inválido:'
     else:        
         driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div/span[2]/div/div[2]/div[2]/button').click()
         time.sleep(2)
-        return 'Mensagem enviada com sucesso'
+        driver.close()
+        return 'msg ok'

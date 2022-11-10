@@ -5,22 +5,32 @@
 
 {% block main %}        
     <!-- aqui nós pegamos o objeto default do método object_list que provê todos do model-->    
-    <div class="container">
-        <h3>Lista de todos laudos</h3>
-        <ul class="list-group">
+    <table class="table table-striped">
+        <thead>        
+        <tr>
+            <th scope="col">Número</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Data Validade</th>            
+            <th scope="col">Opções</th>            
+            <th scope="col">telefone</th>            
+            <th scope="col">Dias para Vencer</th>
+            <th scope="col">Editar</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for laudo in object_list %}
-            <li class="list-group-item">
-                <a href="{% url 'laudo_update' laudo.pk %}">Laudo Nº {{ laudo.numero}}
-                     Vencimento: {{ laudo.dataValidade }}
-                </a>            
-                <a href="{% url 'laudo_delete' laudo.id %}"  
-                    onclick="return confirm('Você tem certeza que quer deletar ?')">
-                    <i class="fa-solid fa-trash icon_delete"></i></a>
-            </li>
-            </br>            
-        <!-- aqui verifica-se não tem nenhum é passada essa resposta. -->        
-        {% endfor %}      
-        </ul>        
+            <tr>
+                <th>{{ laudo.numero }}</th>
+                <th>{{ laudo.tipo }}</th>
+                <th>{{ laudo.dataValidade }}</th>                        
+                <th><a href="{% url 'prepare' laudo.pk %}"><i class="fa-brands fa-whatsapp"></a></i></th>
+                <th>{{ laudo.telefone }}</th>            
+                <th>{{ laudo.vencimento }}</th>            
+                <th><a href="{% url 'laudo_update' laudo.id %}"><i class="fa-solid fa-pen"></i></a></th>            
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>       
         <a href="{% url 'laudo_create' %}"><button class="btn btn-info">Cadastrar Novos</button></a>    
         <br/>
     </div>

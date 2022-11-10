@@ -1,12 +1,14 @@
-from typing import List
+import time
 from django.shortcuts import get_object_or_404, redirect, render
+import urllib
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+from django.views.generic import TemplateView
 from clientes.forms import DateForm
-from .models import Empresa, Laudo, Person
+from .models import Empresa, Laudo, Mensage, Person
 from django.views.generic.list import ListView
 #from django.contrib.auth.mixins import LoginRequiredMixin
+from gestor_laudo import scrapers
 
 class PersonCreate(CreateView):
     model = Person
@@ -52,8 +54,13 @@ class LaudoCreate(CreateView):
     fields = ['numero','tipo','cliente', 'empresa','placa','dataLaudo','dataValidade']  
     success_url = reverse_lazy('laudo_list')
 
-class LaudoList(ListView):
-    model = Laudo
+def LaudoList(request):         
+    laudos = Laudo.objects.all().order_by('dataValidade')                
+    for laudo in laudos:
+        #aqui eu estou adicionando esses atributos só para a table        
+        laudo.telefone = laudo.get_laudo_number()
+        laudo.vencimento = laudo.get_days_left()        
+    return render(request, 'clientes/laudo_list.html', {'object_list':laudos})    
     
 class LaudoUpdate(UpdateView):
     model = Laudo
@@ -72,3 +79,41 @@ def Laudo_new(request):
         form.save()
         return redirect('laudo_list')
     return render(request, 'clientes/laudo_form.html', {'form':form})
+
+def verify_mensage():    
+    laudos = Laudo.objects.all()    
+    list_msg = []    
+    for laudo in laudos:        
+        if (laudo.get_days_left() < 31):
+            #verifica se já existe uma mensagem dessas no banco            
+            vencimento = laudo.get_days_left()
+            phone = laudo.get_laudo_number()
+            #infelizment nãosei como corrigir isso.
+            mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {vencimento} dias. Venha à Agil Inspeções : Endereço: TO 080 - Luzimangues, Porto Nacional - TO. Abraço e tenha um bom dia" 
+            if(Mensage.objects.filter(laudo = laudo, type='periodo1').exists()):                
+               print('Já foi enviada mensagem no período de 30 dias')
+            else:
+                msg = Mensage(mensage = mensagem,phone = phone,laudo = laudo,type = 'periodo1')                           
+                print('Será enviada a mensagem dos 30 dias')
+                if(Mensage.objects.filter(type='periodo2').exists()):
+                    msg.type = 'periodo2'
+                    print('Será enviada a mensagem dos 15 dias')
+                list_msg.append(msg)               
+    try:            
+        Mensage.objects.bulk_create(list_msg)
+        print('tudo certo por hoje, todas as mensagens foram para o banco.')
+    except:
+        print('Erro no salve das mensagens')
+        
+def send_mensage():
+    mensage = Mensage
+    for mensage in mensage.objects.filter(send=False):
+        #TODO aqui enviar um email se o whatsapp estiver offline o whatsapp;
+        if(scrapers.whats_login()):
+            request = scrapers.send_messege(mensage.mensage, mensage.phone)
+            if(request == 'msg ok'):
+                mensage.send = True
+                mensage.save()
+            else:
+                #TODO enviar email com o erro do número cadastrado.
+                pass
