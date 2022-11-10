@@ -8,4 +8,4 @@ class ClientesConfig(AppConfig):
     def ready(self):
         print("Starting Scheduler...")
         from .mensage_scheduler import mensage_scheduler
-        mensage_scheduler.start()
+        #mensage_scheduler.start()

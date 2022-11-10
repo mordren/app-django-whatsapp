@@ -47,7 +47,7 @@ def scrape(url):
         print(driver.current_window_handle)   
         driver.get(url)
     except:
-        driver = startHeroku()
+        driver = start()
         driver.get(url)    
     
 def importWhatsappQrCode():            
