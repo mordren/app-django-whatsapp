@@ -31,7 +31,7 @@ def personDelete(request, pk):
 
 class LaudoCreate(CreateView):
     model = Laudo
-    fields = ['numero','tipo','cliente', 'empresa','placa','dataLaudo','dataValidade']  
+    fields = ['numero','tipo','cliente', 'placa','dataLaudo','dataValidade']  
     success_url = reverse_lazy('laudo_list')
 
 def LaudoList(request):         
@@ -43,7 +43,7 @@ def LaudoList(request):
     
 class LaudoUpdate(UpdateView):
     model = Laudo
-    fields = ['numero','tipo','cliente', 'empresa','placa','dataLaudo','dataValidade'] 
+    fields = ['numero','tipo','cliente', 'placa','dataLaudo','dataValidade'] 
     success_url = reverse_lazy('laudo_list')
     
 def LaudoDelete(request, pk):

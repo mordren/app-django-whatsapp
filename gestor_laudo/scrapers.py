@@ -42,13 +42,18 @@ def start():
     return driver
     
 def scrape(url): 
-    global driver           
-    try:        
-        print(driver.current_window_handle)   
+    global driver                
+    try:       
         driver.get(url)
     except:
-        driver = startHeroku()
+        if(os.name == 'nt'):
+            driver = start()
+        else:
+            driver = startHeroku()
+        
         driver.get(url)    
+
+    
     
 def importWhatsappQrCode():            
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
