@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.options import Options
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 driver = webdriver
+
 #aqui fiz algumas mudanças para rodar no servidor online
 def startHeroku():
     chrome_options = Options()
