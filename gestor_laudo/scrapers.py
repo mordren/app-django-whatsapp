@@ -22,9 +22,10 @@ def startHeroku():
     chrome_options.binary_location = os.environ.get('/usr/bin/google-chrome')
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument('--profile-directory=Default')
     chrome_options.add_argument("--no-sandbox")    
-    #chrome_options.add_argument("user-agent=User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.62 Safari/537.36")
-    chrome_options.add_argument('--user-data-dir=/usr/bin/google-chrome') #TODO alterar isso para o servidor.    
+    chrome_options.add_argument("user-agent=User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.62 Safari/537.36")
+    chrome_options.add_argument('--user-data-dir=/home/root/chrome') #TODO alterar isso para o servidor.    
     os.environ['WDM_LOCAL'] = '1'
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
                 chrome_options=chrome_options)                        
@@ -55,9 +56,7 @@ def scrape(url):
         else:
             driver = startHeroku()       
         driver.get(url)    
-
-    
-    
+     
 def importWhatsappQrCode():            
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
     global driver    

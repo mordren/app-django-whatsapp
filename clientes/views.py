@@ -66,7 +66,7 @@ def verify_mensage():
         if (laudo.get_days_left() < 31):
             #verifica se já existe uma mensagem dessas no banco            
             vencimento = laudo.get_days_left()            
-            #infelizment nãosei como corrigir isso.
+            #infelizment não sei como corrigir isso.
             mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {vencimento} dias. Venha à Agil Inspeções : Endereço: TO 080 - Luzimangues, Porto Nacional - TO. Abraço e tenha um bom dia" 
             if(Mensage.objects.filter(laudo = laudo, type='periodo1').exists()):                
                print('Já foi enviada mensagem no período de 30 dias')

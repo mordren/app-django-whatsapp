@@ -26,6 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+ALLOWED_HOSTS = ['app-agil.herokuapp.com','127.0.0.1','191.101.70.108', 'anintel.shop']
 
 # Application definition
 
