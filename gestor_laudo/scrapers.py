@@ -79,9 +79,7 @@ def whats_login():
         print('esperando para conectar')       
         driver.save_screenshot('../static/load.png')                  
         #faz uma verificação se o whatsapp está conectado na conta.
-        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):      
-            time.sleep(2)   
-            driver.close()              
+        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):                  
             return True
         if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div[2]/div/canvas')) >= 1):
             return False
