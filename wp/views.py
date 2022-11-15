@@ -29,14 +29,14 @@ def prepareMessage(request, pk):
     laudo.mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {laudo.vencimento} dias. Venha à Agil Inspeções : Endereço bla bla bla, Palmas-TO. Abraço e tenha um bom dia"
     return render(request, 'wp/send.html',{'laudo':laudo})
 
-def sendMessage(request):    
-    if (scrapers.whats_login()):
+def sendMessage(request):        
+    try:
         if request.method == "POST":
             number = request.POST.get("number")
             message = request.POST.get("message")                    
             envio = scrapers.send_messege(message, number)    
         return render(request, 'wp/sended.html', {'envio': envio})
-    else:
+    except:
         scrapers.importWhatsappQrCode()
         return render(request, 'wp/status.html')
     

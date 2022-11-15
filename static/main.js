@@ -13,7 +13,7 @@ function statusWhatsApp(){
             if(response['status'] == 'logout'){
                 dataBox.innerHTML += '<h5>Por favor faça o login</h5>'                
                 dataBox.innerHTML += '<img src="/static/image.png"/>'                
-                dataBox.innerHTML += '<span style="color:red">Atualize a página assim que conectar o whatsapp</span>'                
+                dataBox.innerHTML += '<p style="color:red">Espere o seu whatsapp terminar de sincronizar, vefique no app</p>'                
                 linkStatus.style.display = 'none'             
             }else{
                 dataBox.innerHTML += '<h5 style="color:green">O whatsapp está logado no servidor</h5>'
@@ -21,9 +21,9 @@ function statusWhatsApp(){
             }
         }, 
         error: function(response){
-            alert('errro')
+            console.log(response)
+            dataBox.innerHTML += '<p style="color:red">Ocorreu um erro</p>'               
         }
     })
 }
-
 statusWhatsApp()

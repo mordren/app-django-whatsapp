@@ -49,8 +49,7 @@ def scrape(url):
     global driver                
     try:
         driver.get(url)
-    except:
-        print(os.name)
+    except:        
         if(os.name == 'nt'):
             driver = start()
         else:
@@ -67,9 +66,9 @@ def importWhatsappQrCode():
         img_file = open('static/image.png', 'wb')
         img_file.write(canvas_png)
         img_file.close()            
-        print('qrcode baixado na pasta media')                            
+        print('qrcode baixado na pasta media')                         
     except:
-        print('Erro na importação do whatsapp')
+        print('Erro na importação do whatsapp')        
 
 def whats_login():        
     global driver
@@ -77,9 +76,12 @@ def whats_login():
     #TODO fazer uma barra de progresso na view que irá chamar ele.            
     while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
         time.sleep(1)
-        print('esperando para conectar')                 
+        print('esperando para conectar')       
+        driver.save_screenshot('../static/load.png')                  
         #faz uma verificação se o whatsapp está conectado na conta.
-        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):            
+        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):      
+            time.sleep(2)   
+            driver.close()              
             return True
         if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div[2]/div/canvas')) >= 1):
             return False
@@ -92,8 +94,8 @@ def send_messege(msg,telefone):
     while len(driver.find_elements(By.ID, 'pane-side')) < 1:            
         time.sleep(1)
         print('whats carregando')    
-    time.sleep(3)
-    
+    time.sleep(4)   
+   
     if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/span[2]/div/span/div/div/div/div/div/div[1]'))  > 0):
         print('numero invalido')
         time.sleep(3)
