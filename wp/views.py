@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 import time
 from clientes.models import Laudo
@@ -6,11 +7,11 @@ from django.shortcuts import get_object_or_404
 
 def status(request):
     if (scrapers.whats_login()):
-        return render(request, 'wp/status.html', {'status':True})
+        return JsonResponse({'status':'login'})
     else:        
         scrapers.importWhatsappQrCode()
         time.sleep(2)
-        return render(request, 'wp/status.html', {'status':False})
+        return JsonResponse({'status':'logout'})
  
 def vencimento(request):
     laudos = Laudo.objects.all()                
@@ -21,7 +22,7 @@ def vencimento(request):
     return render(request, 'wp/vencimento.html', {'laudos':laudos})
 
 def prepareMessage(request, pk):
-    laudo = get_object_or_404(Laudo, pk=pk)    
+    laudo = get_object_or_404(Laudo, pk=pk)
     #aqui eu estou adicionando esses atributos só para o FORM
     laudo.telefone = laudo.cliente.whatsapp
     laudo.vencimento = Laudo.get_days_left(laudo)           
