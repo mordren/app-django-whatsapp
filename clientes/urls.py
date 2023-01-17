@@ -13,10 +13,8 @@ urlpatterns = [
     path('laudo_list/', login_required(LaudoList), name="laudo_list"),
     path('laudo_create/', login_required(LaudoCreate.as_view()), name="laudo_create"),
     path('laudo_update/<int:pk>/', login_required(LaudoUpdate.as_view()), name="laudo_update"),
-    path('laudo_delete/<int:pk>/', LaudoDelete, name="laudo_delete"),        
+    path('laudo_delete/<int:pk>/', LaudoDelete, name="laudo_delete"),
     
-    path('laudo_new/', login_required(Laudo_new), name="laudo_new"),
-    
+    path('laudo_new/', login_required(Laudo_new), name="laudo_new"),   
+    path('test/', send_mensage,name='mensagem'),
 ]
-
-

@@ -61,32 +61,26 @@ def Laudo_new(request):
 
 def verify_mensage():    
     laudos = Laudo.objects.all()    
-    list_msg = []    
     for laudo in laudos:        
+        msg = ''
         if (laudo.get_days_left() < 31):
             #verifica se já existe uma mensagem dessas no banco            
             vencimento = laudo.get_days_left()            
             #infelizment não sei como corrigir isso.
             mensagem = f"Olá estamos entrando em contato para lhe informar que o veículo: *{laudo.placa}*, estará com o *{laudo.tipo}* vencendo em {vencimento} dias. Venha à Agil Inspeções : Endereço: TO 080 - Luzimangues, Porto Nacional - TO. Abraço e tenha um bom dia" 
-            if(Mensage.objects.filter(laudo = laudo, type='periodo1').exists()):                
-               print('Já foi enviada mensagem no período de 30 dias')
+            
+            if(Mensage.objects.filter(laudo = laudo, type="periodo1").exists()):
+                print('Existe a mensagem')
             else:
-                msg = Mensage(mensage = mensagem,phone = laudo.cliente.whatsapp,laudo = laudo,type = 'periodo1')                           
-                print('Será enviada a mensagem dos 30 dias')
-                if(Mensage.objects.filter(type='periodo2').exists()):
-                    msg.type = 'periodo2'
-                    print('Será enviada a mensagem dos 15 dias')
-                list_msg.append(msg)               
-    try:            
-        Mensage.objects.bulk_create(list_msg)
-        print('tudo certo por hoje, todas as mensagens foram para o banco.')
-    except:
-        print('Erro no salve das mensagens')
-        
+                msg = Mensage(mensage = mensagem,phone = laudo.cliente.whatsapp,laudo = laudo,type = 'periodo1')
+                Mensage.save(msg)
+                        
 def send_mensage():
     mensage = Mensage
+    print('send messege')
     for mensage in mensage.objects.filter(send=False):
         #TODO aqui enviar um email se o whatsapp estiver offline o whatsapp;
+        print('passou')
         if(scrapers.whats_login()):
             request = scrapers.send_messege(mensage.mensage, mensage.phone)
             if(request == 'msg ok'):
@@ -94,4 +88,4 @@ def send_mensage():
                 mensage.save()
             else:
                 #TODO enviar email com o erro do número cadastrado.
-                pass
+                pass   
