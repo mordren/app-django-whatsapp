@@ -36,7 +36,7 @@ def start():
     chrome_options = Options()
     #mantem o chrome aberto mais tempo.
     #chrome_options.add_experimental_option("detach", True)
-    chrome_options.add_argument('--profile-directory=Default')
+    #chrome_options.add_argument('--profile-directory=Default')
     #salve tudo dentro dessa pasta, para servidor preciso que isso aqui seja modificado.    
     chrome_options.add_argument('--user-data-dir=E:\\Programação\\Python\\App Agil\\app-django-whatsapp\\.wdm\\drivers\\chromedriver\\win32\\107.0.5304') #TODO alterar isso para o servidor.    
     os.environ['WDM_LOCAL'] = '1'
@@ -56,7 +56,7 @@ def scrape(url):
             driver = startHeroku()       
         driver.get(url)    
      
-def importWhatsappQrCode():            
+def importWhatsappQrCode():
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
     global driver    
     try:
@@ -81,7 +81,7 @@ def whats_login():
         #faz uma verificação se o whatsapp está conectado na conta.
         if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):                  
             return True
-        if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div[2]/div/canvas')) >= 1):
+        if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div/div[1]/ol/li[4]')) >= 1):
             return False
     
 def send_messege(msg,telefone):    
@@ -104,5 +104,3 @@ def send_messege(msg,telefone):
         time.sleep(4)
         driver.close()
         return 'msg ok'
-    
-print(os.name)
