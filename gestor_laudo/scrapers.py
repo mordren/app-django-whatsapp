@@ -59,6 +59,7 @@ def scrape(url):
 def importWhatsappQrCode():
     #pega um script e roda no servidor para pegar o canvas  que é o qrCode
     global driver    
+    time.sleep(3)
     try:
         script = "return document.querySelector('canvas[aria-label=\"Scan me!\"]').toDataURL('image/png', 1.0).substring(21);"
         url = driver.execute_script(script)            
@@ -72,14 +73,14 @@ def importWhatsappQrCode():
 
 def whats_login():        
     global driver
-    scrape('https://web.whatsapp.com/')    
+    scrape('https://web.whatsapp.com/')
     #TODO fazer uma barra de progresso na view que irá chamar ele.            
-    while len(driver.find_elements(By.ID, 'pane-side')) < 1:        
+    while len(driver.find_elements(By.ID, 'pane-side')) < 1:
         time.sleep(1)
-        print('esperando para conectar')       
-        driver.save_screenshot('../static/load.png')                  
+        print('esperando para conectar')
+        driver.save_screenshot('../static/load.png')
         #faz uma verificação se o whatsapp está conectado na conta.
-        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):                  
+        if (len(driver.find_elements(By.ID, 'pane-side')) >= 1):               
             return True
         if (len(driver.find_elements(By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/div/div[1]/ol/li[4]')) >= 1):
             return False

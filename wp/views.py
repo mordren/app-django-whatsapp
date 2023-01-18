@@ -8,9 +8,9 @@ from django.shortcuts import get_object_or_404
 def status(request):
     if (scrapers.whats_login()):
         return JsonResponse({'status':'login'})
-    else:        
-        scrapers.importWhatsappQrCode()
-        time.sleep(2)
+    else:  
+        scrapers.importWhatsappQrCode()        
+        time.sleep(2)      
         return JsonResponse({'status':'logout'})
  
 def vencimento(request):

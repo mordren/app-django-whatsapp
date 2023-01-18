@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os 
+import mimetypes
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -139,3 +140,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = 'MEDIA'
 
+mimetypes.add_type('text/css', '.css', True)
+mimetypes.add_type("application/javascript", ".js", True)
