@@ -4,7 +4,7 @@ const linkStatus = document.getElementById('status')
 
 /* SpinnerBox.style.display = "none" */
 function statusWhatsApp(){
-    SpinnerBox.style.display = "block"
+    SpinnerBox.style.display = "block"    
     $.ajax({
         type: 'GET',
         url: '/wp/status/',
@@ -26,3 +26,4 @@ function statusWhatsApp(){
         }
     })
 }
+statusWhatsApp()
